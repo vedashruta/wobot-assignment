@@ -34,7 +34,7 @@ It provides user authentication with JWT, secure file upload with storage quotas
     &nbsp;├── id2</br>
 
 ## Arcitecture
-Source: [draw.io](https://pkg.go.dev/github.com/goccy/go-graphviz#section-readme)
+Source: [draw.io]([https://pkg.go.dev/github.com/goccy/go-graphviz#section-readme](https://drive.google.com/file/d/17I0tFEAjEEgh7ngzoSsfttizdNa5CkBe/view?usp=sharing))
 
 ## 🚀 How to Run the Server
 
