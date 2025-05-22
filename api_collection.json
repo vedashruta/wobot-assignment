@@ -1,0 +1,99 @@
+{
+    "info": {
+        "_postman_id": "49a53435-b810-407b-8113-dbed94fedafe",
+        "name": "wobot",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "register",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:3000/users/register",
+                    "path": [
+                        "users",
+                        "register"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"username\": \"vedashrutabhat@gmail.com\",\n  \"password\": \"123456\"\n}"
+                }
+            }
+        },
+        {
+            "name": "login",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:3000/users/login",
+                    "path": [
+                        "users",
+                        "login"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"username\": \"vedashrutabhat@gmail.com\",\n  \"password\": \"123456\"\n}"
+                }
+            }
+        },
+        {
+            "name": "remaining",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:3000/api/storage/remaining?user_id=682e8cc079a0e20f25ed9452",
+                    "query": [
+                        {
+                            "key": "user_id",
+                            "value": "682e8cc079a0e20f25ed9452"
+                        }
+                    ],
+                    "variable": [],
+                    "path": [
+                        "api",
+                        "storage",
+                        "remaining"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "3000"
+                }
+            }
+        }
+    ]
+}
