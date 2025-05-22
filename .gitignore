@@ -2,3 +2,4 @@ storage
 __debug_*
 go.sum
 vendor
+.vscode
