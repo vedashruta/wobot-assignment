@@ -1,99 +1,219 @@
 {
-    "info": {
-        "_postman_id": "49a53435-b810-407b-8113-dbed94fedafe",
-        "name": "wobot",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-        "description": ""
-    },
-    "item": [
-        {
-            "name": "register",
-            "request": {
-                "method": "POST",
-                "url": {
-                    "raw": "http://127.0.0.1:3000/users/register",
-                    "path": [
-                        "users",
-                        "register"
-                    ],
-                    "protocol": "http",
-                    "host": [
-                        "127",
-                        "0",
-                        "0",
-                        "1"
-                    ],
-                    "port": "3000"
-                },
-                "body": {
-                    "mode": "raw",
-                    "options": {
-                        "raw": {
-                            "language": "json"
-                        }
-                    },
-                    "raw": "{\n  \"username\": \"vedashrutabhat@gmail.com\",\n  \"password\": \"123456\"\n}"
-                }
-            }
-        },
-        {
-            "name": "login",
-            "request": {
-                "method": "POST",
-                "url": {
-                    "raw": "http://127.0.0.1:3000/users/login",
-                    "path": [
-                        "users",
-                        "login"
-                    ],
-                    "protocol": "http",
-                    "host": [
-                        "127",
-                        "0",
-                        "0",
-                        "1"
-                    ],
-                    "port": "3000"
-                },
-                "body": {
-                    "mode": "raw",
-                    "options": {
-                        "raw": {
-                            "language": "json"
-                        }
-                    },
-                    "raw": "{\n  \"username\": \"vedashrutabhat@gmail.com\",\n  \"password\": \"123456\"\n}"
-                }
-            }
-        },
-        {
-            "name": "remaining",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://127.0.0.1:3000/api/storage/remaining?user_id=682e8cc079a0e20f25ed9452",
-                    "query": [
-                        {
-                            "key": "user_id",
-                            "value": "682e8cc079a0e20f25ed9452"
-                        }
-                    ],
-                    "variable": [],
-                    "path": [
-                        "api",
-                        "storage",
-                        "remaining"
-                    ],
-                    "protocol": "http",
-                    "host": [
-                        "127",
-                        "0",
-                        "0",
-                        "1"
-                    ],
-                    "port": "3000"
-                }
-            }
-        }
-    ]
+	"info": {
+		"_postman_id": "3630245f-10bf-4ba9-806e-f1c168b4bd74",
+		"name": "wobot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29564967"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"vedashrutabhat@gmail.com\",\n  \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"vedashrutabhat@gmail.com\",\n  \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/users/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remaining",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Authorization-Bearer",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Cookie",
+						"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiIl0sImV4cCI6MTc0NzkyMDg1MCwiaWF0IjoxNzQ3OTE3MjUwLCJqdGkiOiI2ODJlYWM1NWY4YjhiNWQ3NjRlYTYzNzgifQ.ggW5YyMedUiWwlUQAh4stOZ110mtiggRkpFvfCa5ewg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/storage/remaining?user_id=682eac55f8b8b5d764ea6378",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"storage",
+						"remaining"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "682eac55f8b8b5d764ea6378"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "files",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/storage/remaining?user_id=682e8cc079a0e20f25ed9452",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"storage",
+						"remaining"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "682e8cc079a0e20f25ed9452"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiIl0sImV4cCI6MTc0NzkyMDg1MCwiaWF0IjoxNzQ3OTE3MjUwLCJqdGkiOiI2ODJlYWM1NWY4YjhiNWQ3NjRlYTYzNzgifQ.ggW5YyMedUiWwlUQAh4stOZ110mtiggRkpFvfCa5ewg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiIl0sImV4cCI6MTc0NzkyNjc1MiwiaWF0IjoxNzQ3OTIzMTUyLCJqdGkiOiI2ODJlYWM1NWY4YjhiNWQ3NjRlYTYzNzgifQ.aC15a7wXNEsNYD9eh4VoCgKi9twIsCPnTfo6uziziqc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/storage/fetch/682f32530f0013b0ff54ea85?user_id=682eac55f8b8b5d764ea6378",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"storage",
+						"fetch",
+						"682f32530f0013b0ff54ea85"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "682eac55f8b8b5d764ea6378"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }

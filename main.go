@@ -13,7 +13,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	app := fiber.New()
+	app := fiber.New(
+		fiber.Config{
+			BodyLimit: 62914560,
+		},
+	)
 	api.Configure(app)
 	err = app.Listen(env.Port)
 	if err != nil {

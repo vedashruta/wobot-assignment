@@ -10,6 +10,7 @@ type File struct {
 	ID         primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
 	UserID     primitive.ObjectID `json:"user_id" bson:"user_id"`
 	FileName   string             `json:"file_name" bson:"file_name"`
+	Path       string             `json:"path" bson:"path"`
 	Extension  string             `json:"extension" bson:"extension"`
 	UUID       string             `json:"uuid" bson:"uuid"`
 	Size       int                `json:"size" bson:"size"`

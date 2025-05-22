@@ -17,10 +17,16 @@ func register(c *fiber.Ctx) (err error) {
 	req := Request{}
 	err = c.BodyParser(&req)
 	if err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	if req.Username == "" || req.Password == "" {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "username and password are required"})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status": "failure",
+			"error":  "username and password are required",
+		})
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -35,18 +41,27 @@ func register(c *fiber.Ctx) (err error) {
 	err = env.UsersCollection.FindOne(ctx, filter).Decode(&res)
 	if err != nil {
 		if err != mongo.ErrNoDocuments {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"status": "failure",
+				"error":  err.Error(),
+			})
 		} else {
 			ok = true
 		}
 	}
 	if !ok {
 		err = fmt.Errorf("user already registered")
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	hashedPwd, err := bcrypt.Hash(req.Password)
 	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "failed to hash password"})
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	user := User{
 		Username:     req.Username,
@@ -56,16 +71,25 @@ func register(c *fiber.Ctx) (err error) {
 	}
 	_, err = env.UsersCollection.InsertOne(ctx, user)
 	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "failed to create user"})
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
-	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"message": "user registered successfully"})
+	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
+		"status":  "success",
+		"message": "user registered successfully",
+	})
 }
 
 func login(c *fiber.Ctx) (err error) {
 	req := Request{}
 	err = c.BodyParser(&req)
 	if err != nil {
-		return c.JSON(fiber.Map{"error": err.Error()})
+		return c.JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	var user User
 	ctx, cancel := context.WithCancel(context.TODO())
@@ -78,19 +102,31 @@ func login(c *fiber.Ctx) (err error) {
 	}
 	err = env.UsersCollection.FindOne(ctx, filter).Decode(&user)
 	if err != nil {
-		return c.JSON(fiber.Map{"error": err.Error()})
+		return c.JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	ok, err := bcrypt.Verify(req.Password, user.Password)
 	if err != nil {
-		return c.JSON(fiber.Map{"error": err.Error()})
+		return c.JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	if !ok {
 		err = fmt.Errorf("invalid credentials")
-		return c.JSON(fiber.Map{"error": err.Error()})
+		return c.JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	signedToken, err := jwt.NewClaims(user.ID)
 	if err != nil {
-		return c.JSON(fiber.Map{"error": err.Error()})
+		return c.JSON(fiber.Map{
+			"status": "failure",
+			"error":  err.Error(),
+		})
 	}
 	expiry := 30 * time.Minute
 	c.Cookie(&fiber.Cookie{
@@ -98,11 +134,12 @@ func login(c *fiber.Ctx) (err error) {
 		Value:    signedToken,
 		Expires:  time.Now().Add(expiry),
 		HTTPOnly: true,
-		Secure:   false, // set to true in production with HTTPS
+		Secure:   false,
 		SameSite: "Strict",
 		Path:     "/",
 	})
 	return c.JSON(fiber.Map{
+		"status":  "success",
 		"message": "login successful",
 		"token":   signedToken,
 	})
